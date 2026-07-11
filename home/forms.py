@@ -38,7 +38,7 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput(
         attrs={"class": INPUT_CLASS, "placeholder": "••••••••"}))
 
-
+from django.utils import timezone
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
@@ -46,7 +46,6 @@ class EventForm(forms.ModelForm):
         widgets = {
             "name": forms.TextInput(attrs={
                 "class": INPUT_CLASS, "placeholder": "Django Basics Workshop"}),
-            
             "dnt": forms.DateTimeInput(attrs={
                 "class": INPUT_CLASS, "type": "datetime-local"}),
             "venue": forms.TextInput(attrs={
@@ -54,3 +53,17 @@ class EventForm(forms.ModelForm):
             "total_seats": forms.NumberInput(attrs={
                 "class": INPUT_CLASS, "min": 1, "placeholder": "50"}),
         }
+
+
+    def is_valid(self):
+        valid = super().is_valid()
+        if not valid:
+            return valid
+
+        # Ensure the event date is in the future
+        dnt = self.cleaned_data.get("dnt")
+        if dnt and dnt <= timezone.now():
+            self.add_error("dnt", "Event date and time must be in the future.")
+            return False
+
+        return True

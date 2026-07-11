@@ -13,6 +13,17 @@
         </div>
 
         <form method="post" novalidate>
+          {% if form.errors %}
+            <div class="alert alert-danger py-2 small">
+              <ul class="mb-0">
+                {% for field in form %}
+                  {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                  {% endfor %}
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
           {% csrf_token %}
 
           <div class="mb-3">
@@ -28,7 +39,7 @@
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="id_date_time" class="form-label">Date &amp; Time</label>
-              {{ form.date_time }}
+              {{ form.dnt }}
             </div>
             <div class="col-md-6 mb-3">
               <label for="id_total_seats" class="form-label">Total Seats</label>

@@ -55,7 +55,7 @@
                    style="width: {{ pct_filled }}%;"></div>
             </div>
             <p class="small text-muted-soft mb-3">
-              {{ event.seats_booked }} / {{ event.total_seats }} seats booked
+              {{ event.seats }} / {{ event.total_seats }} seats booked
             </p>
 
             <a href="{% url 'event_detail' event.id %}" class="btn btn-outline-accent w-100">

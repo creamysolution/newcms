@@ -201,7 +201,7 @@ h1, h2, h3, h4, h5, .brand, .btn {
   cursor: default;
 }
 .seat.available {
-  background-color: #ECECF3;
+  background-color: #5ef372;
   color: var(--muted);
 }
 .seat.booked {
@@ -242,3 +242,4 @@ footer.site-footer {
   background-color: var(--ink);
   color: rgba(255,255,255,0.6);
 }
+
